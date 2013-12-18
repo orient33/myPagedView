@@ -1,12 +1,13 @@
+/**@author dfdun*/
 package jz.sw.customview;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,19 +33,26 @@ public class MainActivity extends Activity {
 				tv.setWidth(w);
 				tv.setTag("i="+i+" , j="+j);
 				tv.setText("row :" + i + ", colum :" + j);
-//				tv.setOnClickListener(new OnClickListener(){
-//					@Override
-//					public void onClick(View v) {
-//						Log.i("sw2df", "onclick");
-//						showToast((String)v.getTag());
-//					}});
+				tv.setOnClickListener(new OnClickListener(){
+					@Override
+					public void onClick(View v) {
+						showToast((String)v.getTag()+"[onclick]");
+					}});
+				tv.setOnLongClickListener(new OnLongClickListener() {
+
+					@Override
+					public boolean onLongClick(View v) {
+						showToast((String)v.getTag()+"  [long click]");
+						return true;
+					}
+				});
 				v.addView(tv);
 			}
 		}
 		return v;
 	}
 
-	void showToast(String s){
-		Toast.makeText(this, s, 0).show();
+	private void showToast(String s){
+		Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
 	}
 }
